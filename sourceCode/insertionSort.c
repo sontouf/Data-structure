@@ -6,7 +6,7 @@ void insertionSort(int* arr, int arrSize)
     for (size_t i = 1; i < arrSize; i++)
     {
         // 스왑을 하다보면 결국 맨뒤에 큰 수가 오게 되므로 arrsize-1 만큼만 반복하면 된다.
-        for (size_t j = i; arr[j] < arr[j-1] && j > 0; j--)
+        for (size_t j = i; j > 0 && arr[j] < arr[j-1]; j--)
         {
             temp = arr[j];
             arr[j] = arr[j-1];

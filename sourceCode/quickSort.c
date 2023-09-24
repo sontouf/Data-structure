@@ -1,22 +1,35 @@
-// 41523 -> 14523 -> 14523 -> 14253 -> 12453 -> 12435 -> 12345
 #include <stdio.h>
 void quickSort(int* arr, int start, int end)
 {
-    if (start == end) return;
+    if (start >= end) return; // 1개 범위기 때문에 정렬된 상태.
     int pivot_index = start;
-    while (start < end)
-    {
-        while (arr[pivot_index] >= arr[start]) start++;
-        while (arr[pivot_index] <= arr[end]) end--;
-        
+    int i = start+1;
+    int j = end;
+    int temp; // 스왑용
+    while (i <= j) { // 엇갈릴때까지
+        while (i <= end && arr[pivot_index] >= arr[i]) i++; // 피벗보다 클 때까지.
+        while (arr[pivot_index] <= arr[j] && j > start) j--; // 피벗보다 작을 떄까지
+        if  (i > j) // 엇갈
+        {
+            temp = arr[j];
+            arr[j] = arr[pivot_index];
+            arr[pivot_index] = temp;
+        }
+        else { // 안 엇갈
+            temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;       
+        }
     }
-    quickSort(arr, )
+    // pivot 값은 정렬됨.
+    quickSort(arr, start, j-1);
+    quickSort(arr, j+1, end);
 }
 int main()
 {
-    int arr[] = {1,10,5,8,7,6,4,3,2,9};
-    quickSort(arr, 0, 10);
-    for (size_t i = 0; i < 10; i++)
+    int arr[] = {1,1,1,1,1};
+    quickSort(arr, 0, 4);
+    for (size_t i = 0; i < 5; i++)
     {
         printf("%d", arr[i]);
         printf("\n");
