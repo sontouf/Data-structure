@@ -1,28 +1,31 @@
-import sys
-input = sys.stdin.readline
+from collections import deque
 
-def dfs(n)->int: # k번쨰에 n을 경로에 넣어보고 사이클에 속한 학생 수 출력
-    nxt = graph[n]
+graph = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [0, 5],
+    3: [1, 6],
+    4: [1],
+    5: [2],
+    6: [3]
+}
+
+def bfs(n):
+    queue = deque()
+    queue.append(n)
     visited[n] = 1
-    path.append(n)
-    if visited[nxt] == 0:
-        return dfs(nxt)
-    else:
-        if nxt in path:
-            return path.index(n)-path.index(nxt)+1
-        return 0
+    while queue:
+        cur = queue.popleft()
+        print(cur, end='->')
+        for nxt in graph[cur]:
+            if visited[nxt] == 0:
+                visited[nxt] = 1
+                queue.append(nxt)
+
     
 
+    
 
 if __name__=='__main__':
-    T = int(input())
-    for _ in range(T):
-        N = int(input())
-        graph = [0] + list(map(int, input().split()))
-        visited = [0] * (N+1)
-        count = 0
-        for i in range(1, N+1):
-            if visited[i] == 0:
-                path = []
-                count += dfs(i)
-        print(N - count)
+    visited = [0] * 7
+    bfs(0)

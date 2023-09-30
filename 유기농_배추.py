@@ -40,3 +40,5 @@ if __name__ =='__main__':
                     dfs(y, x)
                     count += 1
         print(count)
+
+        
