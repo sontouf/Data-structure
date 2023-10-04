@@ -17,7 +17,7 @@ def bfs(sy, sx)->int:
             ny = dy[i] + cy
             nx = dx[i] + cx
 
-            if 0<=ny<N and 0<=nx<N:
+            if 0<=ny<N and 0<=nx<M:
                 if graph[ny][nx] == 1:
                     graph[ny][nx] = 0
                     queue.append((ny,nx))
@@ -28,10 +28,10 @@ def bfs(sy, sx)->int:
 
 
 if __name__=='__main__':
-    N = int(input())
-    graph = [list(map(int, input().strip())) for _ in range(N)]
+    N, M = map(int, input().split())
+    graph = [list(map(int, input().split())) for _ in range(N)]
     component = []
-    component = [bfs(y,x) for x in range(N) for y in range(N) if graph[y][x] == 1]
+    component = [bfs(y,x) for x in range(M) for y in range(N) if graph[y][x] == 1]
     component.sort()
     print(len(component))
     print(*component, sep='\n')
