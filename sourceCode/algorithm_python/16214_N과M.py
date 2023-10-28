@@ -2,16 +2,18 @@ import sys
 input = sys.stdin.readline
 
 def dfs(n, m):
+    print("n, m : ", n, m)
     if n == 1 or m == 1: return 1
     result = 1
     base = n
     index = dfs(n, phi(m)) + phi(m)
+    print("index : ", index, " phi(m) : ", phi(m), " m : ", m)
     while index:
         if index & 1:
             result = (result * base) % m
         index >>= 1
         base = (base**2) % m
-
+    print("result : ", result)  
     return result
 
         
