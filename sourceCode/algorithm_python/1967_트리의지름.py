@@ -21,6 +21,7 @@ def bfs(start):
 				if max_distance < distance[nxt]:
 					max_distance = distance[nxt]
 					max_node = nxt
+					print("max dis : ", max_distance)
 				queue.append(nxt)
 	return (max_distance, max_node)
 
@@ -33,4 +34,5 @@ if __name__=='__main__':
 		graph[e].append((s, d))
 	distance, node = bfs(1)
 	distance, node = bfs(node)
+	print(graph)
 	print(distance)
